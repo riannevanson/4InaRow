@@ -48,28 +48,6 @@ class GameDetails extends PureComponent {
       })
     );
     updateGame(game.id, board);
-<<<<<<< HEAD
-
-    // Update the board for r=0 to r=rowToFill times with
-    // play symbol at the each row 
-    // Does not work probably because screen rendering only happens
-    // at the end
-    // for (let r=0;r<=rowToFill;r++){
-    //   console.log(r,' row to rerender board with play symbol')
-    //   updateGame(game.id, game.board.map(
-    //     (row, rowIndex) => row.map((cell, cellIndex) => {
-    //       // For the column clicked fill the next row with the player symbol
-    //       if (rowIndex === r && cellIndex === toCell) return game.turn
-    //       else return cell
-    //     })
-    //   ))
-    //   console.log('waiting 1 secs')
-    //   this.wait(1000)
-    // }
-
- 
-=======
->>>>>>> b08bf6725d1a3be6acb4697e9406f9839e92d4c8
   };
 
   render() {
@@ -82,8 +60,6 @@ class GameDetails extends PureComponent {
 
     const player = game.players.find(p => p.userId === userId);
 
-<<<<<<< HEAD
-=======
     let symbolPlayer = "x";
     if (player)
       if (player.symbol === "x") {
@@ -94,7 +70,6 @@ class GameDetails extends PureComponent {
         symbolPlayer = "symbolPlayer-default";
       }
 
->>>>>>> b08bf6725d1a3be6acb4697e9406f9839e92d4c8
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0];
