@@ -21,25 +21,19 @@ class GameDetails extends PureComponent {
   makeMove = (toRow, toCell) => {
     const { game, updateGame } = this.props;
 
-    let rowToFill = null
+    console.log("makeMove");
 
-    // For the column clicked by the user find the lowest
-    // row where the cell is not yet filled
-    game.board.forEach(
-      (row, rowIndex) => row.forEach((cell, cellIndex) => {
-        // check the column index where user pressed &&
-        // check whether cell is filled
-        // then update the rowToFill with the rowIndex
-        if (cellIndex === toCell && !cell) rowToFill=rowIndex
+    let rowToFill = null;
+
+    game.board.forEach((row, rowIndex) =>
+      row.forEach((cell, cellIndex) => {
+        console.log("row/col :", rowToFill + " " + toCell);
+        if (cellIndex === toCell && !cell) rowToFill = rowIndex;
       })
     );
 
-    // If all rows for the column are filled don't do anything
-    if (!rowToFill) return
+    console.log("row/col to fill:", rowToFill + " " + toCell);
 
-    console.log(rowToFill,'rowToFill')
-    // Update the board with the play symbol where the user clicked
-    // This is the logic without gravity, commented out
     // const board = game.board.map(
     //   (row, rowIndex) => row.map((cell, cellIndex) => {
     //     if (rowIndex === toRow && cellIndex === toCell) return game.turn
@@ -47,18 +41,14 @@ class GameDetails extends PureComponent {
     //   })
     // )
 
-    // Update the board with the play symbol in the lowest empty row
-    // where the user clicked
-    // This is the logic with gravity
-    const board = game.board.map(
-      (row, rowIndex) => row.map((cell, cellIndex) => {
-        // For the column clicked fill the lowest empty row with the player symbol
-        if (rowIndex === rowToFill && cellIndex === toCell) return game.turn
-        else return cell
+    const board = game.board.map((row, rowIndex) =>
+      row.map((cell, cellIndex) => {
+        if (rowIndex === rowToFill && cellIndex === toCell) return game.turn;
+        else return cell;
       })
     );
-
     updateGame(game.id, board);
+<<<<<<< HEAD
 
     // Update the board for r=0 to r=rowToFill times with
     // play symbol at the each row 
@@ -78,15 +68,9 @@ class GameDetails extends PureComponent {
     // }
 
  
+=======
+>>>>>>> b08bf6725d1a3be6acb4697e9406f9839e92d4c8
   };
-
-  wait = (ms) => {
-    var start = new Date().getTime();
-    var end = start;
-    while(end < start + ms) {
-      end = new Date().getTime();
-   }
-  }
 
   render() {
     const { game, users, authenticated, userId } = this.props;
@@ -98,6 +82,19 @@ class GameDetails extends PureComponent {
 
     const player = game.players.find(p => p.userId === userId);
 
+<<<<<<< HEAD
+=======
+    let symbolPlayer = "x";
+    if (player)
+      if (player.symbol === "x") {
+        symbolPlayer = "symbolPlayer-x";
+      } else if (player.symbol === "o") {
+        symbolPlayer = "symbolPlayer-o";
+      } else {
+        symbolPlayer = "symbolPlayer-default";
+      }
+
+>>>>>>> b08bf6725d1a3be6acb4697e9406f9839e92d4c8
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0];
