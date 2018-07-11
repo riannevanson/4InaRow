@@ -34,6 +34,10 @@ class GameDetails extends PureComponent {
       })
     );
 
+    // If all rows for the column are filled don't do anything
+    if (!rowToFill) return
+
+    console.log(rowToFill,'rowToFill')
     // Update the board with the play symbol where the user clicked
     // This is the logic without gravity, commented out
     // const board = game.board.map(
@@ -53,8 +57,35 @@ class GameDetails extends PureComponent {
         else return cell
       })
     );
+
     updateGame(game.id, board);
+
+    // Update the board for r=0 to r=rowToFill times with
+    // play symbol at the each row 
+    // Does not work probably because screen rendering only happens
+    // at the end
+    // for (let r=0;r<=rowToFill;r++){
+    //   console.log(r,' row to rerender board with play symbol')
+    //   updateGame(game.id, game.board.map(
+    //     (row, rowIndex) => row.map((cell, cellIndex) => {
+    //       // For the column clicked fill the next row with the player symbol
+    //       if (rowIndex === r && cellIndex === toCell) return game.turn
+    //       else return cell
+    //     })
+    //   ))
+    //   console.log('waiting 1 secs')
+    //   this.wait(1000)
+    // }
+ 
   };
+
+  wait = (ms) => {
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+      end = new Date().getTime();
+   }
+  }
 
   render() {
     const { game, users, authenticated, userId } = this.props;
