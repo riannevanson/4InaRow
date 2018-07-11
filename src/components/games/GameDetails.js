@@ -60,6 +60,14 @@ class GameDetails extends PureComponent {
 
     const player = game.players.find(p => p.userId === userId);
 
+    let symbolPlayer = null;
+
+    if (player.symbol === "x") {
+      symbolPlayer = "symbolPlayer-x";
+    } else {
+      symbolPlayer = "symbolPlayer-o";
+    }
+
     const winner = game.players
       .filter(p => p.symbol === game.winner)
       .map(p => p.userId)[0];
@@ -78,9 +86,10 @@ class GameDetails extends PureComponent {
           game.players.map(p => p.userId).indexOf(userId) === -1 && (
             <button onClick={this.joinGame}>Join Game</button>
           )}
+        <div className={symbolPlayer} />
 
         {winner && <p>Winner: {users[winner].firstName}</p>}
-
+        {player.symbol}
         <hr />
         <div className="board">
           {game.status !== "pending" && (
