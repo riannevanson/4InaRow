@@ -4,9 +4,9 @@ import "./Board.css";
 const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
   let clasje = null;
 
-  if (symbol === "x") {
+  if (symbol === "x" || symbol === 'X') {
     clasje = "board-tile-x";
-  } else if (symbol === "o") {
+  } else if (symbol === "o" || symbol === 'O') {
     clasje = "board-tile-o";
   } else {
     clasje = "board-tile-null";

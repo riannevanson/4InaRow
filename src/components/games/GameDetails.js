@@ -24,7 +24,8 @@ class GameDetails extends PureComponent {
     console.log("makeMove");
 
     let rowToFill = null;
-
+    // Find the lowest empty cell for the row that the user has 
+    // clicked the column for
     game.board.forEach((row, rowIndex) =>
       row.forEach((cell, cellIndex) => {
         console.log("row/col :", rowToFill + " " + toCell);
@@ -34,6 +35,9 @@ class GameDetails extends PureComponent {
 
     console.log("row/col to fill:", rowToFill + " " + toCell);
 
+    // Update the board with the player symbol in the cell
+    // that the user clicked 
+    // Non-gravity case, commented out
     // const board = game.board.map(
     //   (row, rowIndex) => row.map((cell, cellIndex) => {
     //     if (rowIndex === toRow && cellIndex === toCell) return game.turn
@@ -41,12 +45,17 @@ class GameDetails extends PureComponent {
     //   })
     // )
 
+    // Update the board with the player symbol in the lowest empty cell for 
+    // the row that the user has clicked the column for
+    // Gravity case
     const board = game.board.map((row, rowIndex) =>
       row.map((cell, cellIndex) => {
         if (rowIndex === rowToFill && cellIndex === toCell) return game.turn;
+
         else return cell;
       })
     );
+    // Update the board in the database
     updateGame(game.id, board);
   };
 
