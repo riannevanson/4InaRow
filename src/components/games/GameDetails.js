@@ -21,19 +21,21 @@ class GameDetails extends PureComponent {
   makeMove = (toRow, toCell) => {
     const { game, updateGame } = this.props;
 
-    console.log("makeMove");
+    let rowToFill = null
 
-    let rowToFill = null;
-
-    game.board.forEach((row, rowIndex) =>
-      row.forEach((cell, cellIndex) => {
-        console.log("row/col :", rowToFill + " " + toCell);
-        if (cellIndex === toCell && !cell) rowToFill = rowIndex;
+    // For the column clicked by the user find the lowest
+    // row where the cell is not yet filled
+    game.board.forEach(
+      (row, rowIndex) => row.forEach((cell, cellIndex) => {
+        // check the column index where user pressed &&
+        // check whether cell is filled
+        // then update the rowToFill with the rowIndex
+        if (cellIndex === toCell && !cell) rowToFill=rowIndex
       })
     );
 
-    console.log("row/col to fill:", rowToFill + " " + toCell);
-
+    // Update the board with the play symbol where the user clicked
+    // This is the logic without gravity, commented out
     // const board = game.board.map(
     //   (row, rowIndex) => row.map((cell, cellIndex) => {
     //     if (rowIndex === toRow && cellIndex === toCell) return game.turn
@@ -41,10 +43,14 @@ class GameDetails extends PureComponent {
     //   })
     // )
 
-    const board = game.board.map((row, rowIndex) =>
-      row.map((cell, cellIndex) => {
-        if (rowIndex === rowToFill && cellIndex === toCell) return game.turn;
-        else return cell;
+    // Update the board with the play symbol in the lowest empty row
+    // where the user clicked
+    // This is the logic with gravity
+    const board = game.board.map(
+      (row, rowIndex) => row.map((cell, cellIndex) => {
+        // For the column clicked fill the lowest empty row with the player symbol
+        if (rowIndex === rowToFill && cellIndex === toCell) return game.turn
+        else return cell
       })
     );
     updateGame(game.id, board);
