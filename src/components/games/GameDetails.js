@@ -7,6 +7,7 @@ import { userId } from "../../jwt";
 import Paper from "material-ui/Paper";
 import Board from "./Board";
 import "./GameDetails.css";
+import Chat from "./Chat";
 
 class GameDetails extends PureComponent {
   componentWillMount() {
@@ -93,6 +94,7 @@ class GameDetails extends PureComponent {
             <Board board={game.board} makeMove={this.makeMove} />
           )}
         </div>
+        <Chat />
       </Paper>
     );
   }
