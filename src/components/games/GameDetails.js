@@ -28,8 +28,8 @@ class GameDetails extends PureComponent {
 
     game.board.forEach(
       (row, rowIndex) => row.forEach((cell, cellIndex) => {
-        
-        if (cell===null) rowToFill=rowIndex
+        console.log('row/col :',rowToFill + ' ' + toCell)
+        if (cellIndex === toCell && !cell) rowToFill=rowIndex
       })
     )
 
