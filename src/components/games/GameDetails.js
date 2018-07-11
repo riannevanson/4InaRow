@@ -22,12 +22,32 @@ class GameDetails extends PureComponent {
   makeMove = (toRow, toCell) => {
     const {game, updateGame} = this.props
 
-    const board = game.board.map(
-      (row, rowIndex) => row.map((cell, cellIndex) => {
-        if (rowIndex === toRow && cellIndex === toCell) return game.turn
-        else return cell
+    console.log('makeMove')
+
+    let rowToFill = null
+
+    game.board.forEach(
+      (row, rowIndex) => row.forEach((cell, cellIndex) => {
+        
+        if (cell===null) rowToFill=rowIndex
       })
     )
+
+    console.log('row/col to fill:',rowToFill + ' ' + toCell)
+
+    // const board = game.board.map(
+    //   (row, rowIndex) => row.map((cell, cellIndex) => {
+    //     if (rowIndex === toRow && cellIndex === toCell) return game.turn
+    //     else return cell
+    //   })
+    // )
+
+    const board = game.board.map(
+      (row, rowIndex) => row.map((cell, cellIndex) => {
+        if (rowIndex === rowToFill && cellIndex === toCell) return game.turn
+        else return cell
+      })
+    )    
     updateGame(game.id, board)
   }
 
