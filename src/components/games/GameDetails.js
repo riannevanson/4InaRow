@@ -60,7 +60,7 @@ class GameDetails extends PureComponent {
 
     const player = game.players.find(p => p.userId === userId);
 
-    let symbolPlayer = "x";
+    let symbolPlayer = null;
     if (player)
       if (player.symbol === "x") {
         symbolPlayer = "symbolPlayer-x";
@@ -77,20 +77,16 @@ class GameDetails extends PureComponent {
     return (
       <Paper className="outer-paper">
         <h1>Game #{game.id}</h1>
-
         <p>Status: {game.status}</p>
-
+        Your color is: <div className={symbolPlayer} />
         {game.status === "started" &&
           player &&
           player.symbol === game.turn && <div>It's your turn!</div>}
-
         {game.status === "pending" &&
           game.players.map(p => p.userId).indexOf(userId) === -1 && (
             <button onClick={this.joinGame}>Join Game</button>
           )}
-
         {winner && <p>Winner: {users[winner].firstName}</p>}
-
         <hr />
         <div className="board">
           {game.status !== "pending" && (
