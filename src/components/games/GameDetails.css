@@ -17,7 +17,7 @@
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  background-color: red;
+  background-color: yellow;
   margin: 3px;
 }
 
@@ -25,6 +25,6 @@
   height: 50px;
   width: 50px;
   border-radius: 50%;
-  background-color: yellow;
+  background-color: red;
   margin: 3px;
 }
