@@ -1,39 +1,38 @@
-import React, {PureComponent} from 'react'
-import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
-import {getGames, joinGame, updateGame} from '../../actions/games'
-import {getUsers} from '../../actions/users'
-import {userId} from '../../jwt'
-import Paper from 'material-ui/Paper'
-import Board from './Board'
-import './GameDetails.css'
+import React, { PureComponent } from "react";
+import { connect } from "react-redux";
+import { Redirect } from "react-router-dom";
+import { getGames, joinGame, updateGame } from "../../actions/games";
+import { getUsers } from "../../actions/users";
+import { userId } from "../../jwt";
+import Paper from "material-ui/Paper";
+import Board from "./Board";
+import "./GameDetails.css";
 
 class GameDetails extends PureComponent {
-
   componentWillMount() {
     if (this.props.authenticated) {
-      if (this.props.game === null) this.props.getGames()
-      if (this.props.users === null) this.props.getUsers()
+      if (this.props.game === null) this.props.getGames();
+      if (this.props.users === null) this.props.getUsers();
     }
   }
 
-  joinGame = () => this.props.joinGame(this.props.game.id)
+  joinGame = () => this.props.joinGame(this.props.game.id);
 
   makeMove = (toRow, toCell) => {
-    const {game, updateGame} = this.props
+    const { game, updateGame } = this.props;
 
-    console.log('makeMove')
+    console.log("makeMove");
 
-    let rowToFill = null
+    let rowToFill = null;
 
-    game.board.forEach(
-      (row, rowIndex) => row.forEach((cell, cellIndex) => {
-        console.log('row/col :',rowToFill + ' ' + toCell)
-        if (cellIndex === toCell && !cell) rowToFill=rowIndex
+    game.board.forEach((row, rowIndex) =>
+      row.forEach((cell, cellIndex) => {
+        console.log("row/col :", rowToFill + " " + toCell);
+        if (cellIndex === toCell && !cell) rowToFill = rowIndex;
       })
-    )
+    );
 
-    console.log('row/col to fill:',rowToFill + ' ' + toCell)
+    console.log("row/col to fill:", rowToFill + " " + toCell);
 
     // const board = game.board.map(
     //   (row, rowIndex) => row.map((cell, cellIndex) => {
@@ -42,62 +41,54 @@ class GameDetails extends PureComponent {
     //   })
     // )
 
-    const board = game.board.map(
-      (row, rowIndex) => row.map((cell, cellIndex) => {
-        if (rowIndex === rowToFill && cellIndex === toCell) return game.turn
-        else return cell
+    const board = game.board.map((row, rowIndex) =>
+      row.map((cell, cellIndex) => {
+        if (rowIndex === rowToFill && cellIndex === toCell) return game.turn;
+        else return cell;
       })
-    )    
-    updateGame(game.id, board)
-  }
-
-
+    );
+    updateGame(game.id, board);
+  };
 
   render() {
-    const {game, users, authenticated, userId} = this.props
+    const { game, users, authenticated, userId } = this.props;
 
-    if (!authenticated) return (
-			<Redirect to="/login" />
-		)
+    if (!authenticated) return <Redirect to="/login" />;
 
-    if (game === null || users === null) return 'Loading...'
-    if (!game) return 'Not found'
+    if (game === null || users === null) return "Loading...";
+    if (!game) return "Not found";
 
-    const player = game.players.find(p => p.userId === userId)
+    const player = game.players.find(p => p.userId === userId);
 
     const winner = game.players
       .filter(p => p.symbol === game.winner)
-      .map(p => p.userId)[0]
+      .map(p => p.userId)[0];
 
-    return (<Paper className="outer-paper">
-      <h1>Game #{game.id}</h1>
+    return (
+      <Paper className="outer-paper">
+        <h1>Game #{game.id}</h1>
 
-      <p>Status: {game.status}</p>
+        <p>Status: {game.status}</p>
 
-      {
-        game.status === 'started' &&
-        player && player.symbol === game.turn &&
-        <div>It's your turn!</div>
-      }
+        {game.status === "started" &&
+          player &&
+          player.symbol === game.turn && <div>It's your turn!</div>}
 
-      {
-        game.status === 'pending' &&
-        game.players.map(p => p.userId).indexOf(userId) === -1 &&
-        <button onClick={this.joinGame}>Join Game</button>
-      }
+        {game.status === "pending" &&
+          game.players.map(p => p.userId).indexOf(userId) === -1 && (
+            <button onClick={this.joinGame}>Join Game</button>
+          )}
 
-      {
-        winner &&
-        <p>Winner: {users[winner].firstName}</p>
-      }
+        {winner && <p>Winner: {users[winner].firstName}</p>}
 
-      <hr />
-
-      {
-        game.status !== 'pending' &&
-        <Board board={game.board} makeMove={this.makeMove} />
-      }
-    </Paper>)
+        <hr />
+        <div className="board">
+          {game.status !== "pending" && (
+            <Board board={game.board} makeMove={this.makeMove} />
+          )}
+        </div>
+      </Paper>
+    );
   }
 }
 
@@ -106,10 +97,16 @@ const mapStateToProps = (state, props) => ({
   userId: state.currentUser && userId(state.currentUser.jwt),
   game: state.games && state.games[props.match.params.id],
   users: state.users
-})
+});
 
 const mapDispatchToProps = {
-  getGames, getUsers, joinGame, updateGame
-}
+  getGames,
+  getUsers,
+  joinGame,
+  updateGame
+};
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameDetails)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(GameDetails);

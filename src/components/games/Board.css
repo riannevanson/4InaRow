@@ -2,3 +2,26 @@
   height: 50px;
   width: 50px;
 }
+.board-tile-x {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: yellow;
+  margin: 3px;
+}
+
+.board-tile-o {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: red;
+  margin: 3px;
+}
+
+.board-tile-null {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: white;
+  margin: 3px;
+}
