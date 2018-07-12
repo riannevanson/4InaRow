@@ -70,6 +70,15 @@ class GameDetails extends PureComponent {
     updateGame(game.id, board);
   };
 
+  // handleChange(event) {
+  //   this.setState({ value: event.target.value });
+  // }
+
+  // handleSubmit(event) {
+  //   alert("A name was submitted: " + this.state.value);
+  //   event.preventDefault();
+  // }
+
   render() {
     const { game, users, authenticated, userId } = this.props;
 

@@ -2,21 +2,40 @@ import { connect } from "react-redux";
 import React from "react";
 import { userId } from "../../jwt";
 
-const renderMessages = chats => {
-  return (
-    <div className="chatroom">
-      <h3>Chatbox</h3>
-      {chats.map(chat => <div key={chat.message}>{chat.message}</div>)}
+export default class Chat extends React.PureComponent {
+  state = {};
 
-      <form className="input" onSubmit={e => this.submitMessage(e)}>
-        <input type="text" />
-        <input type="submit" value="Submit" />
-      </form>
-    </div>
-  );
-};
-// submitMessage(e) {
-//   e.preventDefault();
-// }
+  handleSubmit = e => {
+    e.preventDefault();
+    if (this.state.title) {
+      this.props.createAlbum(this.state.title);
+    }
+  };
 
-export default ({ chats }) => renderMessages(chats);
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  render() {
+    return (
+      <div className="chatroom">
+        <h3>Chatbox</h3>
+        {this.props.chats.map(chat => (
+          <div key={chat.message}>{chat.message}</div>
+        ))}
+
+        <form onSubmit={this.handleSubmit}>
+          <label>
+            Name:
+            <input
+              type="text"
+              value={this.state.value}
+              onChange={this.handleChange}
+            />
+          </label>
+          <input type="submit" value="Submit" />
+        </form>
+      </div>
+    );
+  }
+}
