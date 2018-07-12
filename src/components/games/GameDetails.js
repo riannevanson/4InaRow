@@ -112,7 +112,8 @@ class GameDetails extends PureComponent {
         <hr />
         <div className="board">
           {game.status !== "pending" && (
-            <Board board={game.board} makeMove={this.makeMove} />
+            <Board board={game.board} winnerCells={game.winnerCells} 
+                   makeMove={this.makeMove} />
           )}
         </div>
         <Chat />

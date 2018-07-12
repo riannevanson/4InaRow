@@ -1,8 +1,16 @@
 import React from "react";
 import "./Board.css";
 
-const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
+const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn, winnerCells) => {
   let clasje = null;
+
+  //console.log(winnerCells,'winnerCells')
+  winnerCells.forEach(cell => {
+    if (cell[0]===rowIndex && cell[1]===cellIndex) {
+      console.log('row',rowIndex,'col',cellIndex,'to blink')
+      clasje = "board-tile-blink"
+    }
+  })
 
   if (symbol === "x" || symbol === 'X') {
     clasje = "board-tile-x";
@@ -24,11 +32,11 @@ const renderCel = (makeMove, rowIndex, cellIndex, symbol, hasTurn) => {
   );
 };
 
-export default ({ board, makeMove }) =>
+export default ({ board, makeMove, winnerCells }) =>
   board.map((cells, rowIndex) => (
     <div key={rowIndex}>
       {cells.map((symbol, cellIndex) =>
-        renderCel(makeMove, rowIndex, cellIndex, symbol, false)
+        renderCel(makeMove, rowIndex, cellIndex, symbol, false, winnerCells)
       )}
     </div>
   ));

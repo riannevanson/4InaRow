@@ -138,3 +138,13 @@
   background-color: white;
   margin: 3px;
 }
+
+.board-tile-blink {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: yellow;
+  margin: 3px;
+  animation-name: example;
+  animation-duration: 4s;
+}
