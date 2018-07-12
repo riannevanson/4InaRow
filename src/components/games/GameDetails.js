@@ -1,5 +1,5 @@
-import React, { PureComponent } from "react";
 import { connect } from "react-redux";
+import React, { PureComponent } from "react";
 import { Redirect } from "react-router-dom";
 import { getGames, joinGame, updateGame } from "../../actions/games";
 import { getUsers } from "../../actions/users";
@@ -27,14 +27,26 @@ class GameDetails extends PureComponent {
     let rowToFill = null;
     // Find the lowest empty cell for the row that the user has 
     // clicked the column for
-    game.board.forEach((row, rowIndex) =>
-      row.forEach((cell, cellIndex) => {
-        console.log("row/col :", rowToFill + " " + toCell);
-        if (cellIndex === toCell && !cell) rowToFill = rowIndex;
-      })
-    );
+    for (let r=0;r<game.board.length;r++) {
+      if (!game.board[r][toCell])
+        rowToFill = r
+      else break // Found the lowest non-empty row/col cell
+    }
+    // The following has unnecessary loops
+    // game.board.forEach((row, rowIndex) => {
+    //   if (!board[rowindex,toCell])
+    //     rowToFill = rowIndex
+    // }
+    // Even more unnecessary loops
+    // game.board.forEach((row, rowIndex) =>
+    //   row.forEach((cell, cellIndex) => {
+    //     if (cellIndex === toCell && !cell) rowToFill = rowIndex;
+    //   })
+    // );
 
     console.log("row/col to fill:", rowToFill + " " + toCell);
+    // If there is no row to fill do nothing
+    if (rowToFill===null) return
 
     // Update the board with the player symbol in the cell
     // that the user clicked 
