@@ -25,12 +25,11 @@ class GameDetails extends PureComponent {
     console.log("makeMove");
 
     let rowToFill = null;
-    // Find the lowest empty cell for the row that the user has 
+    // Find the lowest empty cell for the row that the user has
     // clicked the column for
-    for (let r=0;r<game.board.length;r++) {
-      if (!game.board[r][toCell])
-        rowToFill = r
-      else break // Found the lowest non-empty row/col cell
+    for (let r = 0; r < game.board.length; r++) {
+      if (!game.board[r][toCell]) rowToFill = r;
+      else break; // Found the lowest non-empty row/col cell
     }
     // The following has unnecessary loops
     // game.board.forEach((row, rowIndex) => {
@@ -46,10 +45,10 @@ class GameDetails extends PureComponent {
 
     console.log("row/col to fill:", rowToFill + " " + toCell);
     // If there is no row to fill do nothing
-    if (rowToFill===null) return
+    if (rowToFill === null) return;
 
     // Update the board with the player symbol in the cell
-    // that the user clicked 
+    // that the user clicked
     // Non-gravity case, commented out
     // const board = game.board.map(
     //   (row, rowIndex) => row.map((cell, cellIndex) => {
@@ -58,13 +57,12 @@ class GameDetails extends PureComponent {
     //   })
     // )
 
-    // Update the board with the player symbol in the lowest empty cell for 
+    // Update the board with the player symbol in the lowest empty cell for
     // the row that the user has clicked the column for
     // Gravity case
     const board = game.board.map((row, rowIndex) =>
       row.map((cell, cellIndex) => {
         if (rowIndex === rowToFill && cellIndex === toCell) return game.turn;
-
         else return cell;
       })
     );
@@ -112,11 +110,14 @@ class GameDetails extends PureComponent {
         <hr />
         <div className="board">
           {game.status !== "pending" && (
-            <Board board={game.board} winnerCells={game.winnerCells} 
-                   makeMove={this.makeMove} />
+            <Board
+              board={game.board}
+              winnerCells={game.winnerCells}
+              makeMove={this.makeMove}
+            />
           )}
         </div>
-        <Chat />
+        <Chat chats={game.chats} />
       </Paper>
     );
   }
