@@ -102,15 +102,7 @@
   animation-name: bounceInDown;
 }
 
-/* The animation code */
-@keyframes example {
-  from {
-    background-color: red;
-  }
-  to {
-    background-color: yellow;
-  }
-}
+
 .board-tile-x {
   height: 50px;
   width: 50px;
@@ -139,12 +131,53 @@
   margin: 3px;
 }
 
-.board-tile-blink {
+@keyframes opacity {
+  0% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+/* The animation blinking code */
+@keyframes blink-x {
+  from {
+    background-color: yellow;
+  }
+  to {
+    background-color: white;
+  }
+}
+
+@keyframes blink-o {
+  from {
+    background-color: red;
+  }
+  to {
+    background-color: white;
+  }
+}
+
+.board-tile-x-blink {
   height: 50px;
   width: 50px;
   border-radius: 50%;
   background-color: yellow;
   margin: 3px;
-  animation-name: example;
-  animation-duration: 4s;
+  animation: blink-x 0.65s ease-in-out infinite;
+}
+
+.board-tile-o-blink {
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  background-color: red;
+  margin: 3px;
+  animation: blink-o 0.65s ease-in-out infinite;
 }
