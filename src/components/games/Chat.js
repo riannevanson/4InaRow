@@ -7,6 +7,7 @@ import "./GameDetails.css";
 
 class Chat extends React.PureComponent {
   state = {};
+  message = "";
 
   handleSubmit = e => {
     e.preventDefault();
@@ -21,6 +22,20 @@ class Chat extends React.PureComponent {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  showMessageOne = () => {
+    // console.log(this.props.chats[0].message, "props");
+    if (this.props.chats.length > 0) {
+      return this.props.chats[0].message;
+    }
+  };
+
+  showMessageTwo = () => {
+    // console.log(this.props.chats[1].message, "props");
+    if (this.props.chats.length > 1) {
+      return this.props.chats[1].message;
+    }
+  };
+
   render() {
     return (
       <div className="chatroom">
@@ -29,10 +44,8 @@ class Chat extends React.PureComponent {
           <div key={chat.message}>{chat.message}</div>
         ))} */}
         <div className="messagContainer">
-          <div className="messageCurrentuser">
-            {this.props.chats[0].message}
-          </div>
-          <div className="messageEnemy">{this.props.chats[1].message}</div>
+          <div className="messageCurrentuser">{this.showMessageOne()}</div>
+          <div className="messageEnemy">{this.showMessageTwo()}</div>
         </div>
 
         <form onSubmit={this.handleSubmit}>
