@@ -1,7 +1,7 @@
 .outer-paper {
   margin-top: 20px;
   margin: auto;
-  padding: 20px;
+
   width: 60%;
   background-color: aqua;
 }
@@ -11,6 +11,8 @@
   padding-left: 5px;
   padding-top: 5px;
   background-color: blue;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .symbolPlayer-x {
@@ -28,13 +30,40 @@
   background-color: red;
   margin: 3px;
 }
-.messageContainer {
+.chat-o {
   display: flex;
   justify-content: space-around;
-  padding-top: 17px;
+  padding-top: 15px;
   height: 50px;
   width: 400px;
   background-color: aliceblue;
   border: aqua;
   margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.chat-x {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 15px;
+  height: 50px;
+  width: 400px;
+  background-color: aliceblue;
+  border: aqua;
+  margin-bottom: 10px;
+  flex-direction: row-reverse;
+  margin-left: auto;
+  margin-right: auto;
+}
+.labelMessagesContainer {
+  background-color: aliceblue;
+  border: 1px solid blue;
+  width: 400px;
+  display: flex;
+  justify-content: space-around;
+  padding-top: 10px;
+
+  margin-left: auto;
+  margin-right: auto;
 }

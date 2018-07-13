@@ -38,23 +38,35 @@ class Chat extends React.PureComponent {
   };
 
   render() {
+    let symbolPlayer = null;
+    if (this.props.player)
+      if (this.props.player.symbol === "x") {
+        symbolPlayer = "chat-x";
+      } else if (this.props.player.symbol === "o") {
+        symbolPlayer = "chat-o";
+      } else {
+        symbolPlayer = "chat-default";
+      }
+
     return (
       <div className="chatroom">
         <h3>Chatbox</h3>
-        {this.props.player.id}
+        {/* {this.props.player.symbol} */}
         {/* {this.props.players.map(playerOne => (
           <div key={playerOne.id}>{playerOne.id}</div>
         ))} */}
-
-        <div className="messageContainer">
-          <div className="messageCurrentuser">
-            <h2>{this.showMessageOne()}</h2>
+        <div className="labelMessagesContainer">
+          <div>
+            <h2>Incoming Message</h2>
           </div>
-          <div className="messageEnemy">
-            <h2>{this.showMessageTwo()}</h2>
+          <div>
+            <h2>Your Message</h2>
           </div>
         </div>
-
+        <div className={symbolPlayer}>
+          <div className="messageCurrentuser">{this.showMessageOne()}</div>
+          <div className="messageCurrentuser">{this.showMessageTwo()}</div>
+        </div>
         <form onSubmit={this.handleSubmit}>
           <label>
             Type your message here:
