@@ -101,7 +101,11 @@ class GameDetails extends PureComponent {
             />
           )}
         </div>
-        <Chat chats={game.chats} player={game.player} />
+        <Chat
+          chats={game.chats}
+          player={game.player}
+          updateMessage={updateMessage}
+        />
       </Paper>
     );
   }

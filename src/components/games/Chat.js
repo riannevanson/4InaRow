@@ -13,8 +13,11 @@ class Chat extends React.PureComponent {
     e.preventDefault();
 
     if (this.state.message) {
-      console.log(this.props.chats[0].id, "chatid");
-      this.props.updateMessage(this.props.chats[0].id, this.state.message);
+      // console.log(this.props.chats[0].id, "chatid");
+      return this.props.updateMessage(
+        this.props.chats[0].id,
+        this.state.message
+      );
     }
   };
 
@@ -43,9 +46,13 @@ class Chat extends React.PureComponent {
         {/* {this.props.chats.map(chat => (
           <div key={chat.message}>{chat.message}</div>
         ))} */}
-        <div className="messagContainer">
-          <div className="messageCurrentuser">{this.showMessageOne()}</div>
-          <div className="messageEnemy">{this.showMessageTwo()}</div>
+        <div className="messageContainer">
+          <div className="messageCurrentuser">
+            <h2>{this.showMessageOne()}</h2>
+          </div>
+          <div className="messageEnemy">
+            <h2>{this.showMessageTwo()}</h2>
+          </div>
         </div>
 
         <form onSubmit={this.handleSubmit}>
