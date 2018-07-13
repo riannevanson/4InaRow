@@ -1,8 +1,6 @@
 import { connect } from "react-redux";
 import React from "react";
-//import { userId } from "../../jwt";
 import { updateMessage } from "../../actions/games";
-//import { userId } from "../../jwt";
 import "./GameDetails.css";
 
 class Chat extends React.PureComponent {
@@ -43,9 +41,11 @@ class Chat extends React.PureComponent {
     return (
       <div className="chatroom">
         <h3>Chatbox</h3>
-        {/* {this.props.chats.map(chat => (
-          <div key={chat.message}>{chat.message}</div>
+        {this.props.player.id}
+        {/* {this.props.players.map(playerOne => (
+          <div key={playerOne.id}>{playerOne.id}</div>
         ))} */}
+
         <div className="messageContainer">
           <div className="messageCurrentuser">
             <h2>{this.showMessageOne()}</h2>

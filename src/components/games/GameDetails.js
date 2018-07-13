@@ -103,7 +103,7 @@ class GameDetails extends PureComponent {
         </div>
         <Chat
           chats={game.chats}
-          player={game.player}
+          player={player}
           updateMessage={updateMessage}
         />
       </Paper>
