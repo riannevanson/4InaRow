@@ -7,6 +7,7 @@ class Chat extends React.PureComponent {
   state = {};
   message = "";
 
+  componentDidMount = () => {};
   handleSubmit = e => {
     e.preventDefault();
 
@@ -67,6 +68,7 @@ class Chat extends React.PureComponent {
           <div className="messageCurrentuser">"{this.showMessageOne()}"</div>
           <div className="messageCurrentuser">"{this.showMessageTwo()}"</div>
         </div>
+
         <form onSubmit={this.handleSubmit}>
           <label>
             Type your message here:
@@ -84,7 +86,21 @@ class Chat extends React.PureComponent {
   }
 }
 
+const mapStateToProps = (state, props) => ({
+  chat: state.chats
+});
+
 export default connect(
-  null,
+  mapStateToProps,
   { updateMessage }
 )(Chat);
+
+// <div className={symbolPlayer}>
+// <div className="messageCurrentuser">
+//   {this.props.chatTwo && Object.values(this.props.chatTwo)[0]}
+// </div>
+// <div className="messageCurrentuser">
+//   {" "}
+//   {this.props.chatTwo && Object.values(this.props.chatTwo)[1]}
+// </div>
+// </div>
