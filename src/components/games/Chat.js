@@ -64,8 +64,8 @@ class Chat extends React.PureComponent {
           </div>
         </div>
         <div className={symbolPlayer}>
-          <div className="messageCurrentuser">{this.showMessageOne()}</div>
-          <div className="messageCurrentuser">{this.showMessageTwo()}</div>
+          <div className="messageCurrentuser">"{this.showMessageOne()}"</div>
+          <div className="messageCurrentuser">"{this.showMessageTwo()}"</div>
         </div>
         <form onSubmit={this.handleSubmit}>
           <label>
