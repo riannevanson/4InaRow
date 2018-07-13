@@ -1,7 +1,12 @@
 import { connect } from "react-redux";
 import React, { PureComponent } from "react";
 import { Redirect } from "react-router-dom";
-import { getGames, joinGame, updateGame } from "../../actions/games";
+import {
+  getGames,
+  joinGame,
+  updateGame,
+  updateMessage
+} from "../../actions/games";
 import { getUsers } from "../../actions/users";
 import { userId } from "../../jwt";
 import Paper from "material-ui/Paper";
@@ -31,31 +36,10 @@ class GameDetails extends PureComponent {
       if (!game.board[r][toCell]) rowToFill = r;
       else break; // Found the lowest non-empty row/col cell
     }
-    // The following has unnecessary loops
-    // game.board.forEach((row, rowIndex) => {
-    //   if (!board[rowindex,toCell])
-    //     rowToFill = rowIndex
-    // }
-    // Even more unnecessary loops
-    // game.board.forEach((row, rowIndex) =>
-    //   row.forEach((cell, cellIndex) => {
-    //     if (cellIndex === toCell && !cell) rowToFill = rowIndex;
-    //   })
-    // );
 
     console.log("row/col to fill:", rowToFill + " " + toCell);
     // If there is no row to fill do nothing
     if (rowToFill === null) return;
-
-    // Update the board with the player symbol in the cell
-    // that the user clicked
-    // Non-gravity case, commented out
-    // const board = game.board.map(
-    //   (row, rowIndex) => row.map((cell, cellIndex) => {
-    //     if (rowIndex === toRow && cellIndex === toCell) return game.turn
-    //     else return cell
-    //   })
-    // )
 
     // Update the board with the player symbol in the lowest empty cell for
     // the row that the user has clicked the column for
@@ -69,15 +53,6 @@ class GameDetails extends PureComponent {
     // Update the board in the database
     updateGame(game.id, board);
   };
-
-  // handleChange(event) {
-  //   this.setState({ value: event.target.value });
-  // }
-
-  // handleSubmit(event) {
-  //   alert("A name was submitted: " + this.state.value);
-  //   event.preventDefault();
-  // }
 
   render() {
     const { game, users, authenticated, userId } = this.props;
@@ -126,7 +101,7 @@ class GameDetails extends PureComponent {
             />
           )}
         </div>
-        <Chat chats={game.chats} />
+        <Chat chats={game.chats} player={game.player} />
       </Paper>
     );
   }
@@ -143,7 +118,8 @@ const mapDispatchToProps = {
   getGames,
   getUsers,
   joinGame,
-  updateGame
+  updateGame,
+  updateMessage
 };
 
 export default connect(

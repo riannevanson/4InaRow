@@ -28,3 +28,7 @@
   background-color: red;
   margin: 3px;
 }
+.messagContainer {
+  display: flex;
+  justify-content: space-between;
+}

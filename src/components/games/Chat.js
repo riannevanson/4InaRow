@@ -1,14 +1,19 @@
 import { connect } from "react-redux";
 import React from "react";
-import { userId } from "../../jwt";
+//import { userId } from "../../jwt";
+import { updateMessage } from "../../actions/games";
+//import { userId } from "../../jwt";
+import "./GameDetails.css";
 
-export default class Chat extends React.PureComponent {
+class Chat extends React.PureComponent {
   state = {};
 
   handleSubmit = e => {
     e.preventDefault();
-    if (this.state.title) {
-      this.props.createAlbum(this.state.title);
+
+    if (this.state.message) {
+      console.log(this.props.chats[0].id, "chatid");
+      this.props.updateMessage(this.props.chats[0].id, this.state.message);
     }
   };
 
@@ -20,15 +25,22 @@ export default class Chat extends React.PureComponent {
     return (
       <div className="chatroom">
         <h3>Chatbox</h3>
-        {this.props.chats.map(chat => (
+        {/* {this.props.chats.map(chat => (
           <div key={chat.message}>{chat.message}</div>
-        ))}
+        ))} */}
+        <div className="messagContainer">
+          <div className="messageCurrentuser">
+            {this.props.chats[0].message}
+          </div>
+          <div className="messageEnemy">{this.props.chats[1].message}</div>
+        </div>
 
         <form onSubmit={this.handleSubmit}>
           <label>
-            Name:
+            Type your message here:
             <input
               type="text"
+              name="message"
               value={this.state.value}
               onChange={this.handleChange}
             />
@@ -39,3 +51,8 @@ export default class Chat extends React.PureComponent {
     );
   }
 }
+
+export default connect(
+  null,
+  { updateMessage }
+)(Chat);
